@@ -1,0 +1,38 @@
+<%= form_for(@person) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+  	<!-- first argument is what the param prefix is going to be called  -->
+  	<!-- in this case we'd see pe[attribute_name] -->
+  	<!-- the second argument is the model object we want to bind the form to -->
+  	<!-- in this case we've bound the fields_for to the same object as the form -->
+  	<!-- this form works the same as the other form we created just using form_for -->
+
+<!--     <%= fields_for @person do |permission_fields|%>
+    	<%= permission_fields.label :permission %><br>
+	    <%= permission_fields.text_field :permission %>
+	<% end %> -->
+
+<!-- if we want to add shirts at the same time for a person -->
+<!-- manually iterate over the collection, and bind fields for to the form builder and pass it the object to bind to (each shirt) -->
+<!-- if we didn't bind to the form builder and just called fields for, we'd get shirt[attribute] in the params rather than person[shirt][attribute] -->
+
+<!--   <% @person.shirts.each do |shirt| %>
+	    <%= f.fields_for shirt do |shirt_fields|%>
+	    	<%= shirt_fields.label :atype %><br>
+		    <%= shirt_fields.text_field :atype %><br>
+		<% end %>
+	<% end %> -->
+
+<!-- if we want to get super clever we can use the collection with fields for -->
+	<%= f.fields_for :shirts do |shirt_fields|%>
+    	<%= shirt_fields.label :atype %><br>
+	    <%= shirt_fields.text_field :atype %><br>
+	<% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
