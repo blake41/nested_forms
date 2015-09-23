@@ -7,16 +7,11 @@
     <%= f.label :permission %><br>
     <%= f.text_field :permission %>
   </div>
-
-  <!-- if we want to add shirts at the same time for a person -->
-  <!-- manually iterate over the collection, and bind fields for to the form builder and pass it the object to bind to (each shirt) -->
-  <!-- if we didn't bind to the form builder and just called fields for, we'd get shirt[attribute] in the params rather than person[shirt][attribute] -->
   <div class="field">
-    <% @person.shirts.each do |shirt| %>
-	    <%= f.fields_for shirt do |shirt_fields|%>
-	    	<%= shirt_fields.label :atype %><br>
-		    <%= shirt_fields.text_field :atype %><br>
-  		<% end %>
+  <!-- if we want to get super clever we can use the collection with fields for -->
+  	<%= f.fields_for :shirts do |shirt_fields|%>
+      	<%= shirt_fields.label :atype %><br>
+  	    <%= shirt_fields.text_field :atype %><br>
   	<% end %>
   </div>
   <div class="actions">
